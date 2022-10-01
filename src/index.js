@@ -9,7 +9,7 @@
 //      console.log('Example app listening on port')
 // })
 
-require("dotenv").config(); //Llama la función Config de la librería dotenv
+require("dotenv").config(); //llama la función Config de la librería dotenv
 const mongoose = require('mongoose') //Guarda una variable con el acceso la librería de Mongoose
 const products = require('../data/productos.json') //Array de objetos
 const router = require('./routes/index') // Rutas creadas
@@ -17,11 +17,10 @@ const express = require('express') //Guarda una variable con el acceso la librer
 
 const app = express(); //Instancia un objeto Express en app y levanta el proceso del servidor
 
-//app.use(express.urlencoded()); // Permite obtener el cuerpo del POST via req.body
-app.use(express.json()); // Permite obtener el cuerpo del POST via req.body
+app.use(express.json()); // nos permite obtener el cuerpo del json en el el req.body (controllers)
 app.use(express.static("public"));
 
-//app.use(router); // Le dice a Express que use el Router
+app.use(router); // Le dice a Express que use el Router
 
 mongoose.connect(process.env.DATABASE_URL)
   .then(() => {
