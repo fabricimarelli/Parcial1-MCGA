@@ -29,7 +29,7 @@ const getProductsById = async (req, res) => {
          if(!response || response.length === 0){
              return res.status(404).json({
                  error: true,
-                 msg: 'El producto no existe'
+                 msg: 'El producto no se encuentra'
              })
          }
 
@@ -55,7 +55,7 @@ const getProductsById = async (req, res) => {
         if(!response || response.length === 0){
             return res.status(404).json({
                 error: true,
-                msg: 'El producto no existe'
+                msg: 'El producto no se encuentra'
             })
         }
 
@@ -76,9 +76,7 @@ const getProductsById = async (req, res) => {
 
  const addProduct =  async (req, res) => {
     try{
-        console.debug(req)
          const Product = new esquemaProducts(req.body)
-         console.debug(Product)
          const newProduct = await Product.save()
          return res.status(200).json({
             data: newProduct,
@@ -86,7 +84,6 @@ const getProductsById = async (req, res) => {
             msg: 'Prodcuto creado'
          })
     }catch (error){
-        console.debug(error)
          return res.status(400).json({
              error: true,
              msg: error
@@ -102,7 +99,7 @@ const getProductsById = async (req, res) => {
         if(!response || response.length === 0){
             return res.status(404).json({
                 error: true,
-                msg: 'No existe el producto'
+                msg: 'No se encuentra el producto que desea eliminar'
             })
         }
         return res.status(200).json({
@@ -118,11 +115,11 @@ const getProductsById = async (req, res) => {
     }
 }
 
-// actualizar por id
+// actualizar por id REVISAR
 const updateProductById = async (req, res) => {
     try {
      
-        const response = await esquemaProducts.findByIdAndUpdate(req.params.id, req.body, {new: true, });
+        const response = await esquemaProducts.findByIdAndUpdate(req.params.id, req.body, {new: true, });//solo permite actualizar si lo busco con el id de mongo
         if (!response) {
             return res.status(400).json({
                 error: true,
